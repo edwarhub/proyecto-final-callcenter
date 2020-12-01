@@ -11,6 +11,11 @@ app.use(
   })
 )
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*'); // Habilito los CORS para cualquier url
+  next();
+});
+
 app.get('/', (request, response) => {
     response.json({ info: 'Node.js, Express, and Postgres API' })
   })
