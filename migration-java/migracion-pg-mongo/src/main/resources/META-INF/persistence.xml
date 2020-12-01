@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="cco.edu.unal.etl.sakila_migracion-pg-mongo_jar_1.0PU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>co.edu.unal.migration.pojo.FpqrMotivo</class>
+    <class>co.edu.unal.migration.pojo.Documentotipo</class>
+    <class>co.edu.unal.migration.pojo.Usuario</class>
+    <class>co.edu.unal.migration.pojo.Transferencia</class>
+    <class>co.edu.unal.migration.pojo.Barrio</class>
+    <class>co.edu.unal.migration.pojo.Agente</class>
+    <class>co.edu.unal.migration.pojo.Ivr</class>
+    <class>co.edu.unal.migration.pojo.Sucursal</class>
+    <class>co.edu.unal.migration.pojo.ClienteWebservice</class>
+    <class>co.edu.unal.migration.pojo.Agenteestado</class>
+    <class>co.edu.unal.migration.pojo.Llamadagestion</class>
+    <class>co.edu.unal.migration.pojo.Campana</class>
+    <class>co.edu.unal.migration.pojo.Guion</class>
+    <class>co.edu.unal.migration.pojo.PbxCdrAsterisk</class>
+    <class>co.edu.unal.migration.pojo.Direccion</class>
+    <class>co.edu.unal.migration.pojo.Festivo</class>
+    <class>co.edu.unal.migration.pojo.CampanabasedatosHasPersona</class>
+    <class>co.edu.unal.migration.pojo.ModInformeConcurrencia</class>
+    <class>co.edu.unal.migration.pojo.InformeUsuario</class>
+    <class>co.edu.unal.migration.pojo.ModSeguridadPerfilHasUsuario</class>
+    <class>co.edu.unal.migration.pojo.Telefono</class>
+    <class>co.edu.unal.migration.pojo.Llamadaprogramada</class>
+    <class>co.edu.unal.migration.pojo.Pais</class>
+    <class>co.edu.unal.migration.pojo.ModMonitoreoSesion</class>
+    <class>co.edu.unal.migration.pojo.FpqrCierre</class>
+    <class>co.edu.unal.migration.pojo.TroncalMarcado</class>
+    <class>co.edu.unal.migration.pojo.Cronlog</class>
+    <class>co.edu.unal.migration.pojo.FpqrDireccionamiento</class>
+    <class>co.edu.unal.migration.pojo.Ivrhorario</class>
+    <class>co.edu.unal.migration.pojo.Campanacampo</class>
+    <class>co.edu.unal.migration.pojo.Troncal</class>
+    <class>co.edu.unal.migration.pojo.FpqrTipo</class>
+    <class>co.edu.unal.migration.pojo.PersonaTelefono</class>
+    <class>co.edu.unal.migration.pojo.IvrOpcion</class>
+    <class>co.edu.unal.migration.pojo.PerfilHasUsuario</class>
+    <class>co.edu.unal.migration.pojo.TroncalLinea</class>
+    <class>co.edu.unal.migration.pojo.Persona</class>
+    <class>co.edu.unal.migration.pojo.ModInformeUsuario</class>
+    <class>co.edu.unal.migration.pojo.Extensiongrupo</class>
+    <class>co.edu.unal.migration.pojo.Extension</class>
+    <class>co.edu.unal.migration.pojo.ColaHasAgente</class>
+    <class>co.edu.unal.migration.pojo.LlamadagestionItem</class>
+    <class>co.edu.unal.migration.pojo.Fpqr</class>
+    <class>co.edu.unal.migration.pojo.Clientecorporativo</class>
+    <class>co.edu.unal.migration.pojo.Clientedependencia</class>
+    <class>co.edu.unal.migration.pojo.Chatmensaje</class>
+    <class>co.edu.unal.migration.pojo.Perfil</class>
+    <class>co.edu.unal.migration.pojo.InformeConcurrencia</class>
+    <class>co.edu.unal.migration.pojo.PerfilFuncionalidad</class>
+    <class>co.edu.unal.migration.pojo.ModSeguridadPerfil</class>
+    <class>co.edu.unal.migration.pojo.Ciudad</class>
+    <class>co.edu.unal.migration.pojo.ModConfigSystemparam</class>
+    <class>co.edu.unal.migration.pojo.FpqrGestion</class>
+    <class>co.edu.unal.migration.pojo.Agenteestadocambio</class>
+    <class>co.edu.unal.migration.pojo.Localidad</class>
+    <class>co.edu.unal.migration.pojo.Llamada</class>
+    <class>co.edu.unal.migration.pojo.Cola</class>
+    <class>co.edu.unal.migration.pojo.Campanahorario</class>
+    <class>co.edu.unal.migration.pojo.Audio</class>
+    <class>co.edu.unal.migration.pojo.CampanacampoOpcion</class>
+    <class>co.edu.unal.migration.pojo.Campanabasedatos</class>
+    <class>co.edu.unal.migration.pojo.Departamentoestado</class>
+    <class>co.edu.unal.migration.pojo.ModSeguridadPerfilFuncionalidad</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/jcoctelDB-bi"/>
+      <property name="javax.persistence.jdbc.user" value="desarrollo"/>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="desarrollo123"/>
+    </properties>
+  </persistence-unit>
+</persistence>
