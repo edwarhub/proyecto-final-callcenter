@@ -1,4 +1,4 @@
-# Server en para Postgres
+# Server para Postgres
 
 ## About
 
