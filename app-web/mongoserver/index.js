@@ -1,0 +1,39 @@
+const Express = require("express");
+const BodyParser = require("body-parser");
+const MongoClient = require("mongodb").MongoClient;
+const CONNECTION_URL = "mongodb://localhost:27017/";
+const DATABASE_NAME = "callmongo";
+
+
+var app = Express();
+app.use(BodyParser.json());
+app.use(BodyParser.urlencoded({ extended: true }));
+var database;
+
+app.get("/agentes", (request, response) => {
+    database.collection("agentes").find({}).toArray((error, result) => {
+        if(error) {
+            return response.status(500).send(error);
+        }
+        response.send(result);
+    });
+});
+
+app.get("/llamadas", (request, response) => {
+    database.collection("llamadas").find({}).limit(5).toArray((error, result) => {
+        if(error) {
+            return response.status(500).send(error);
+        }
+        response.send(result);
+    });
+});
+
+app.listen(3001, () => {
+    MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true }, (error, client) => {
+        if(error) {
+            throw error;
+        }
+        database = client.db(DATABASE_NAME);
+        console.log("Connected to `" + DATABASE_NAME + "`!");
+    });
+});
