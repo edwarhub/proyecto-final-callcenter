@@ -13,10 +13,39 @@ function getllamadas(){
 }
 
 showLlamadas=(llamadas)=>{
-    const llamadasdiv = document.getElementById("llamadasid")
-    llamadas.forEach(llamada => {
-    const llamadasele = document.createElement("p");
-    llamadasele.innerText = `Campaña: ${llamada.nombre} Cantidad: ${llamada.count}`;
-    llamadasdiv.append(llamadasele);
-  });
-}
+
+    var xlabel=[]
+    var values=[]
+    llamadas.forEach(llamada=>{
+        xlabel.push(llamada.nombre)
+        values.push(llamada.count)
+    })
+    drawChart(xlabel,values);
+    
+  };
+
+  drawChart=(xlabel,values)=>{
+    var temp=document.getElementById("chart");
+    temp.remove();
+    var temp2=document.getElementById("divid");
+    var ele=document.createElement('canvas');
+    ele.setAttribute("id","chart")
+    temp2.append(ele);
+    var tipo=document.getElementById('graficos').value;
+    var canvas=document.getElementById('chart');
+    var ctx=canvas.getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: tipo,
+        data: {
+            labels:xlabel,
+            datasets: [{
+                label: 'Llamadas',
+                data: values,
+                backgroundColor: ['#FFA32F',"#FFEC21","#378AFF","#F54F52","#93F03B"],
+                borderColor:  ['#FFA32F',"#FFEC21","#378AFF","#F54F52","#93F03B"],
+                borderWidth: 1
+            }]
+        },
+    });
+
+  }

@@ -4,14 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
    
 </head>
 <body>
     <h1>Conexion base de datos de postgres</h1>
-    <button onclick="getllamadas()">Conectarse</button>
-    <div id="llamadasid"></div>
-
-
-    <script type="text/javascript" src="script.js"></script>
+    <label for="charts">Seleccione un gráfico:</label>
+        <select name="charts" id="graficos">
+            <option value="bar">Barras</option>
+            <option value="pie">Cicular</option> 
+        </select>
+    <button onclick="getllamadas()">Ok</button>
+    <div id="divid">
+        <canvas id="chart" ></canvas>
+    </div>
+    
+    
+    
 </body>
 </html>
