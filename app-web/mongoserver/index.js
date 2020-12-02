@@ -10,6 +10,11 @@ app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
 var database;
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*'); // Habilito los CORS para cualquier url
+    next();
+  });
+
 app.get("/agentes", (request, response) => {
     database.collection("agentes").find({}).toArray((error, result) => {
         if(error) {
