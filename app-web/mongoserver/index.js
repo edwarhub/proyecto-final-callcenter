@@ -1,5 +1,6 @@
 const Express = require("express");
 const BodyParser = require("body-parser");
+const { request } = require("express");
 const MongoClient = require("mongodb").MongoClient;
 const CONNECTION_URL = "mongodb://localhost:27017/";
 const DATABASE_NAME = "callmongo";
@@ -31,6 +32,32 @@ app.get("/llamadas", (request, response) => {
         }
         response.send(result);
     });
+});
+
+app.get("/llamadascampana",(request,response)=>{
+    database.collection("llamadas").mapReduce(
+        function(){
+            var valores={
+                nombre:this.campana.nombre,
+                contador:1,		
+            };
+            emit(this.campana.idcampana,valores);
+        },
+        function(keys,values){
+            var reduced={
+                name:values[0].nombre,
+                count:0
+            }
+            for(var i=0;i<values.length;i++){
+                reduced.count+=1;
+            }
+            return reduced;
+        },
+        { out: { inline: 1 } },
+        function (err, result) {
+            response.send(result);
+        }
+    )
 });
 
 app.listen(3001, () => {

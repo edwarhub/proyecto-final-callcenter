@@ -13,7 +13,7 @@ function getllamadas(){
 }
 
 showLlamadas=(llamadas)=>{
-
+    console.log(Array(5).fill([1,2,3]).flat())
     var xlabel=[]
     var values=[]
     llamadas.forEach(llamada=>{
@@ -25,13 +25,16 @@ showLlamadas=(llamadas)=>{
   };
 
   drawChart=(xlabel,values)=>{
+    var colores=Array(6).fill(['#FFA32F',"#FFEC21","#378AFF","#F54F52","#93F03B"]).flat()
     var temp=document.getElementById("chart");
+    
     temp.remove();
     var temp2=document.getElementById("divid");
     var ele=document.createElement('canvas');
     ele.setAttribute("id","chart")
     temp2.append(ele);
-    var tipo=document.getElementById('graficos').value;
+    //var tipo=document.getElementById('graficos').value;
+    var tipo="bar";
     var canvas=document.getElementById('chart');
     var ctx=canvas.getContext('2d');
     var myChart = new Chart(ctx, {
@@ -41,8 +44,8 @@ showLlamadas=(llamadas)=>{
             datasets: [{
                 label: 'Llamadas',
                 data: values,
-                backgroundColor: ['#FFA32F',"#FFEC21","#378AFF","#F54F52","#93F03B"],
-                borderColor:  ['#FFA32F',"#FFEC21","#378AFF","#F54F52","#93F03B"],
+                backgroundColor: colores,
+                borderColor:  colores,
                 borderWidth: 1
             }]
         },
