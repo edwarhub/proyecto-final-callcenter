@@ -1,0 +1,14 @@
+URL: https://postweb.netlify.app/
+
+Postgres google cloud:
+Instancia ID:postserver
+Password: 1289
+Connection: dbavanzadas:us-central1:postserver
+
+SELECT c.nombre, count(ll.idllamada) FROM llamada ll,campana c WHERE ll.idcampana=c.idcampana GROUP BY c.nombre ORDER BY c.count DESC LIMIT 5
+
+gcloud sql connect postserver --user=postgres
+
+CREATE DATABASE callcenter;
+
+bucket: callcenterpost

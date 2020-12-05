@@ -8,7 +8,7 @@ const pool = new Pool({
 })
 
 const getCalls = (request, response) => {
-    pool.query('SELECT c.nombre, count(ll.idllamada) FROM llamada ll,campana c WHERE ll.idcampana=c.idcampana GROUP BY c.nombre ORDER BY c.count DESC LIMIT 5', (error, results) => {
+    pool.query('SELECT c.nombre, count(ll.idllamada) FROM llamada ll,campana c WHERE ll.idcampana=c.idcampana GROUP BY c.nombre', (error, results) => {
       if (error) {
         throw error
       }
