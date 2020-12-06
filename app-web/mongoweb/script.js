@@ -23,6 +23,39 @@ function getllamadascampana(){
         err => console.log('Request Failed', err)); 
 }
 
+function getduracionpromedio(){
+    fetch(url+'/duracionpromedio')
+    .then(
+        response => response.json())  
+    .then(
+        duracion => showDuracion(duracion)
+        )    
+    .catch(
+        err => console.log('Request Failed', err)); 
+}
+
+function getllamadasmeses(){
+    fetch(url+'/llamadasmeses')
+    .then(
+        response => response.json())  
+    .then(
+        agentes => showCampanas(agentes)
+        )    
+    .catch(
+        err => console.log('Request Failed', err)); 
+}
+
+
+showDuracion=(duracion)=>{
+    var xlabel=[]
+    var values=[]
+    duracion.forEach(d=>{
+        xlabel.push(d.value.name)
+        values.push(d.value.promedio)
+    })
+    drawChart(xlabel,values,"line")
+}
+
 
 
 showCampanas=(campanas)=>{
@@ -32,11 +65,13 @@ showCampanas=(campanas)=>{
         xlabel.push(campana.value.name)
         values.push(campana.value.count)
     })
-    drawChart(xlabel,values);
+    drawChart(xlabel,values,"bar");
 
 }
 
-drawChart=(xlabel,values)=>{
+
+
+drawChart=(xlabel,values,tipo)=>{
     var temp=document.getElementById("chart");
     var colores=Array(6).fill(['#FFA32F',"#FFEC21","#378AFF","#F54F52","#93F03B"]).flat()
     temp.remove();
@@ -46,19 +81,45 @@ drawChart=(xlabel,values)=>{
     temp2.append(ele);
     var canvas=document.getElementById('chart');
     var ctx=canvas.getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels:xlabel,
-            datasets: [{
-                label: 'Llamadas por Campaña',
-                data: values,
-                backgroundColor: colores,
-                borderColor:  colores,
-                borderWidth: 1
-            }]
-        },
-    });
+    if(tipo!='line'){
+        var myChart = new Chart(ctx, {
+            type: tipo,
+            data: {
+                labels:xlabel,
+                datasets: [{
+                    label: 'Llamadas por Campaña',
+                    data: values,
+                    backgroundColor: colores,
+                    borderColor:  colores,
+                    borderWidth: 1
+                }]
+            },
+        });
+    }else{
+        var myChart = new Chart(ctx, {
+            type: tipo,
+            data: {
+                labels:xlabel,
+                datasets: [{
+                    label: 'Duración promedio de la llamada en minutos',
+                    data: values,
+                    backgroundColor: colores,
+                    borderColor:  colores,
+                    borderWidth: 1,
+                    pointRadius:5
+                }]
+            },
+            options:{
+                showLines:false,
+                legend: {
+                    labels: {
+                      boxWidth: 0,
+                    }
+                },
+            }
+        });
+    }
+    
 }
 
 showAgentes=(agentes)=>{

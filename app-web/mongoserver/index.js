@@ -26,7 +26,7 @@ app.get("/agentes", (request, response) => {
 });
 
 app.get("/llamadas", (request, response) => {
-    database.collection("llamadas").find({}).limit(5).toArray((error, result) => {
+    database.collection("llamadas").find({}).toArray((error, result) => {
         if(error) {
             return response.status(500).send(error);
         }
@@ -59,6 +59,63 @@ app.get("/llamadascampana",(request,response)=>{
         }
     )
 });
+
+app.get("/duracionpromedio",(request,response)=>{
+    database.collection("llamadas").mapReduce(
+        function(){
+            var valores={
+                nombre:this.campana.nombre,
+                segundos:this.duracion_seg,		
+            };
+            emit(this.campana.idcampana,valores);
+        },
+        function(keys,values){
+            var reduced={
+                name:values[0].nombre,
+                promedio:0
+            }
+            var total=0
+            for(var i=0;i<values.length;i++){
+                total+=values[i].segundos;
+            }
+            reduced.promedio=parseFloat((total/values.length)/60).toFixed(2);
+            return reduced;
+        },
+        { out: { inline: 1 } },
+        function (err, result) {
+            response.send(result);
+        }
+    )
+})
+
+app.get("/llamadasmeses",(request,response)=>{
+    database.collection("llamadas").mapReduce(
+        function(){
+            var mes=this.fecha.substring(5,7);
+            var campana=this.campana.idcampana;
+            var valores={
+                nombre:this.campana.nombre,
+                contador:1
+            };
+
+            emit({campana,mes},valores);
+        },
+        function(keys,values){
+            var reduced={
+                name:values[0].nombre,
+                llamadas:0
+            }
+            for(var i=0;i<values.length;i++){
+                reduced.llamadas+=values[i].contador;
+            }
+            return reduced;
+        },
+        { out: { inline: 1 } },
+        function (err, result) {
+            response.send(result);
+        }
+    )
+})
 
 app.listen(3001, () => {
     MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true }, (error, client) => {
