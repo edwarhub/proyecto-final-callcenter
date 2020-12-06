@@ -24,6 +24,7 @@ app.get('/agentes', db.getAgentes)
 app.get('/llamadascampana', db.getLlamadascampana)
 app.get('/llamadasmeses', db.getLlamadasmeses)
 app.get('/llamadas', db.getLlamadasmeses)
+app.get('/llamadascount', db.getLlamadas)
 
   app.listen(PORT, () => {
     console.log(`App running on port ${PORT}.`)

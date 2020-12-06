@@ -2,16 +2,16 @@ const { request, response } = require('express')
 
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'postgres',
+  user: 'desarrollo',
   host: 'localhost',
-  database: 'callcenter',
-  password: '1289',
+  database: 'jcoctelDB-bi',
+  password: 'desarrollo123',
   port: 5432,
 })
 
 
 const getLlamadas=(request,response)=>{
-  pool.query("SELECT * FROM llamadas", (error, results) => {
+  pool.query("SELECT count(*) FROM llamada WHERE idcampana =1", (error, results) => {
     if (error) {
       throw error
     }
@@ -50,5 +50,6 @@ module.exports={
     getLlamadascampana,
     getLlamadasmeses,
     getLlamadas,
-    getAgentes
+    getAgentes,
+    getLlamadas
 }
