@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   });
 
 app.get("/agentes", (request, response) => {
-    database.collection("agentes2").find({}).toArray((error, result) => {
+    database.collection("agentes").find({}).toArray((error, result) => {
         if(error) {
             return response.status(500).send(error);
         }
@@ -54,11 +54,14 @@ app.get("/llamadascampana",(request,response)=>{
             }
             return reduced;
         },
-        { out: { inline: 1 } },
-        function (err, result) {
-            response.send(result);
-        }
+        {out:"llamadascampana"}
     )
+    database.collection("llamadascampana").find({}).toArray((error, result) => {
+        if(error) {
+            return response.status(500).send(error);
+        }
+        response.send(result);
+    });
 });
 
 app.get("/duracionpromedio",(request,response)=>{
