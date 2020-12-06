@@ -2,8 +2,8 @@ const Express = require("express");
 const BodyParser = require("body-parser");
 const { request } = require("express");
 const MongoClient = require("mongodb").MongoClient;
-const CONNECTION_URL = "mongodb://192.168.0.4:27017/";
-const DATABASE_NAME = "callcenterdb";
+const CONNECTION_URL = "mongodb://localhost:27017/";
+const DATABASE_NAME = "callmongo";
 
 
 var app = Express();
