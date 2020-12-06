@@ -2,8 +2,8 @@ const Express = require("express");
 const BodyParser = require("body-parser");
 const { request } = require("express");
 const MongoClient = require("mongodb").MongoClient;
-const CONNECTION_URL = "mongodb://localhost:27017/";
-const DATABASE_NAME = "callmongo";
+const CONNECTION_URL = "mongodb://192.168.0.4:27017/";
+const DATABASE_NAME = "callcenterdb";
 
 
 var app = Express();
@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   });
 
 app.get("/agentes", (request, response) => {
-    database.collection("agentes").find({}).toArray((error, result) => {
+    database.collection("agentes2").find({}).toArray((error, result) => {
         if(error) {
             return response.status(500).send(error);
         }
@@ -27,6 +27,7 @@ app.get("/agentes", (request, response) => {
 
 app.get("/llamadas", (request, response) => {
     database.collection("llamadas").find({}).toArray((error, result) => {
+
         if(error) {
             return response.status(500).send(error);
         }
