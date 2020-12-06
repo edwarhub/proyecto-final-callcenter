@@ -4,7 +4,7 @@ const { request } = require("express");
 const MongoClient = require("mongodb").MongoClient;
 const CONNECTION_URL = "mongodb://localhost:27017/";
 const DATABASE_NAME = "callmongo";
-
+const COLECCION="llamadas"
 
 var app = Express();
 app.use(BodyParser.json());
@@ -25,8 +25,8 @@ app.get("/agentes", (request, response) => {
     });
 });
 
-app.get("/llamadas", (request, response) => {
-    database.collection("llamadas").find({}).toArray((error, result) => {
+app.get("/"+COLECCION, (request, response) => {
+    database.collection(COLECCION).find({}).limit(5).toArray((error, result) => {
 
         if(error) {
             return response.status(500).send(error);
@@ -36,7 +36,7 @@ app.get("/llamadas", (request, response) => {
 });
 
 app.get("/llamadascampana",(request,response)=>{
-    database.collection("llamadas").mapReduce(
+    database.collection(COLECCION).mapReduce(
         function(){
             var valores={
                 nombre:this.campana.nombre,
@@ -65,7 +65,7 @@ app.get("/llamadascampana",(request,response)=>{
 });
 
 app.get("/duracionpromedio",(request,response)=>{
-    database.collection("llamadas").mapReduce(
+    database.collection(COLECCION).mapReduce(
         function(){
             var valores={
                 nombre:this.campana.nombre,
@@ -85,15 +85,19 @@ app.get("/duracionpromedio",(request,response)=>{
             reduced.promedio=parseFloat((total/values.length)/60).toFixed(2);
             return reduced;
         },
-        { out: { inline: 1 } },
-        function (err, result) {
-            response.send(result);
-        }
+        { out: "duracionpromedio"}
+        
     )
+    database.collection("duracionpromedio").find({}).toArray((error, result) => {
+        if(error) {
+            return response.status(500).send(error);
+        }
+        response.send(result);
+    });
 })
 
 app.get("/llamadasmeses",(request,response)=>{
-    database.collection("llamadas").mapReduce(
+    database.collection(COLECCION).mapReduce(
         function(){
             var mes=this.fecha.substring(5,7);
             var campana=this.campana.idcampana;
@@ -114,11 +118,14 @@ app.get("/llamadasmeses",(request,response)=>{
             }
             return reduced;
         },
-        { out: { inline: 1 } },
-        function (err, result) {
-            response.send(result);
-        }
+        { out: "llamadasmeses" }   
     )
+    database.collection("llamadasmeses").find({}).toArray((error, result) => {
+        if(error) {
+            return response.status(500).send(error);
+        }
+        response.send(result);
+    });
 })
 
 app.listen(3001, () => {
